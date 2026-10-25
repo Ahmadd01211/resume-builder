@@ -71,7 +71,9 @@ function makeEntry(section: ResumeSection, entry: Entry): Paragraph[] {
     result.push(new Paragraph({
       children: [run(item)],
       bullet: { level: 0 },
-      indent: { left: 360 },
+      // Keep the bullet glyph inside the text block and provide enough hanging
+      // indent for it to remain distinct in Word and PDF exports.
+      indent: { left: 420, hanging: 240 },
       spacing: { after: 20 },
     }));
   }
