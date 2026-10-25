@@ -10,7 +10,7 @@ import {
 import type { Entry, Resume, ResumeSection } from './resume';
 
 const BODY_SIZE = 20; // docx uses half-points: 20 = 10 pt
-const run = (text: string, options: { bold?: boolean; italics?: boolean; size?: number; style?: string; font?: string } = {}) =>
+const run = (text: string, options: { bold?: boolean; italics?: boolean; size?: number; style?: string; font?: string; color?: string } = {}) =>
   new TextRun({ text, font: options.font ?? 'Arial', size: BODY_SIZE, ...options });
 
 function safeHref(value: string, kind: 'url' | 'email' | 'phone'): string | undefined {
@@ -82,17 +82,20 @@ function makeEntry(section: ResumeSection, entry: Entry): Paragraph[] {
 export async function buildResumeDocx(resume: Resume): Promise<Blob> {
   const contact = resume.sections.find((section) => section.kind === 'contact')?.entries[0];
   const children: Paragraph[] = [];
-  const headerAlignment = resume.template === 'modern' || resume.template === 'minimal' ? AlignmentType.LEFT : AlignmentType.CENTER;
-  const headingFont = resume.template === 'classic' || resume.template === 'traditional' ? 'Times New Roman' : 'Arial';
+  const template = resume.template ?? 'simple';
+  const headerAlignment = ['modern', 'minimal', 'professional', 'bold'].includes(template) ? AlignmentType.LEFT : AlignmentType.CENTER;
+  const headingFont = ['classic', 'traditional', 'elegant'].includes(template) ? 'Times New Roman' : 'Arial';
+  const headingColor = ({ professional: '315B83', student: '286A50', elegant: '6C5944', bold: '263B5A' } as Record<string, string>)[template] ?? '111111';
+  const naturalCase = template === 'minimal' || template === 'elegant';
 
   if (resume.sections.find((section) => section.kind === 'contact')?.visible !== false) {
     const name = contact?.name || 'YOUR NAME';
     children.push(new Paragraph({
       alignment: headerAlignment,
       spacing: { after: 40 },
-      children: [run(name.toUpperCase(), { bold: true, size: 34, font: headingFont })],
+      children: [run(naturalCase ? name : name.toUpperCase(), { bold: true, size: 34, font: headingFont, color: headingColor })],
     }));
-    if (contact?.role) children.push(new Paragraph({ alignment: headerAlignment, spacing: { after: 40 }, children: [run(contact.role, { bold: true, font: headingFont })] }));
+    if (contact?.role) children.push(new Paragraph({ alignment: headerAlignment, spacing: { after: 40 }, children: [run(contact.role, { bold: true, font: headingFont, color: headingColor })] }));
     const details: (TextRun | ExternalHyperlink)[] = [];
     const fields: Array<{ value?: string; kind: 'url' | 'email' | 'phone' | 'text' }> = [
       { value: contact?.location, kind: 'text' }, { value: contact?.phone, kind: 'phone' },
@@ -113,7 +116,7 @@ export async function buildResumeDocx(resume: Resume): Promise<Blob> {
       heading: HeadingLevel.HEADING_1,
       keepNext: true,
       spacing: { before: 180, after: 70 },
-      children: [run(resume.template === 'minimal' ? section.title : section.title.toUpperCase(), { bold: true, size: 22, font: headingFont })],
+      children: [run(naturalCase ? section.title : section.title.toUpperCase(), { bold: true, size: 22, font: headingFont, color: headingColor })],
     }));
     if (section.kind === 'skills') {
       children.push(new Paragraph({
