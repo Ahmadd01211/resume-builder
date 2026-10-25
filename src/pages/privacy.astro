@@ -1,0 +1,37 @@
+---
+import '../styles/global.css';
+const title = 'Privacy | ClearCV Resume Builder';
+const description = 'Learn how ClearCV stores resume information in your browser and how optional advertising may work.';
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const adsClient = import.meta.env.PUBLIC_ADSENSE_CLIENT?.trim() ?? '';
+const adsEnabled = import.meta.env.PUBLIC_ADS_ENABLED === 'true' && import.meta.env.PUBLIC_ADS_CONSENT_READY === 'true' && /^ca-pub-\d{16}$/.test(adsClient);
+const privacyEmail = import.meta.env.PUBLIC_PRIVACY_EMAIL?.trim();
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical.toString()} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <main class="policy-page">
+      <a class="policy-back" href="/">← Back to ClearCV</a>
+      <p class="seo-eyebrow">CLEARCV</p>
+      <h1>Privacy</h1>
+      <p class="policy-updated">Last updated: October 25, 2026</p>
+      <h2>Resume information</h2>
+      <p>ClearCV saves resumes in browser storage on the device you are using. This version does not require an account and does not send resume content to a ClearCV server. If you clear this browser’s site data, you may lose saved resumes. Use the backup option to keep or move a copy.</p>
+      <h2>Downloads</h2>
+      <p>PDF and Word documents are generated in your browser and downloaded to your device. You control where those files are stored and who you share them with.</p>
+      <h2>Advertising</h2>
+      {adsEnabled ? <p>This site uses Google AdSense. Google and its advertising partners may use cookies or similar technologies and process information about visits to show, personalize, or measure ads. You can manage consent choices through the consent platform configured by the site owner and review Google’s <a href="https://policies.google.com/technologies/partner-sites">partner-site privacy information</a>.</p> : <p>Advertising is currently disabled. If ads are enabled later, this page will be updated to describe the advertising services and consent choices in use.</p>}
+      <h2>Contact</h2>
+      {privacyEmail ? <p>For privacy questions, contact <a href={`mailto:${privacyEmail}`}>{privacyEmail}</a>.</p> : <p class="policy-note">A privacy contact email has not been published yet.</p>}
+      <p class="policy-note">Before launch, replace this draft with a policy that reflects the site owner’s contact details, advertising setup, and the laws that apply to the site’s visitors.</p>
+    </main>
+  </body>
+</html>

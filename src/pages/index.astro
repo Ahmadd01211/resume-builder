@@ -1,0 +1,81 @@
+---
+import ResumeBuilder from '../ui/ResumeBuilder';
+import AdSlot from '../ui/AdSlot.astro';
+import '../styles/global.css';
+
+const title = 'Free Resume Builder for Students & First-Time Job Seekers | ClearCV';
+const description = 'Create a clear, ATS-friendly resume for your first job. Add education, projects, skills, certificates, and experience, then save a PDF or editable Word document.';
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL('/clearcv-social.svg', Astro.site);
+const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
+const adsClient = import.meta.env.PUBLIC_ADSENSE_CLIENT?.trim() ?? '';
+const adsEnabled = import.meta.env.PUBLIC_ADS_ENABLED === 'true' && import.meta.env.PUBLIC_ADS_CONSENT_READY === 'true' && /^ca-pub-\d{16}$/.test(adsClient);
+const slotArticle = import.meta.env.PUBLIC_ADSENSE_SLOT_ARTICLE?.trim() ?? '';
+const slotBottom = import.meta.env.PUBLIC_ADSENSE_SLOT_BOTTOM?.trim() ?? '';
+const faqs = [
+  { question: 'Can I make a resume with no work experience?', answer: 'Yes. Add education, class or personal projects, skills, certificates, volunteering, and activities. Work experience is optional.' },
+  { question: 'Is this resume builder ATS-friendly?', answer: 'ClearCV exports a simple, single-column resume with standard section headings and selectable text. That can make the document easier for recruiting software to read, but no format can guarantee a particular ATS result.' },
+  { question: 'Where are my resumes saved?', answer: 'Resumes are saved in this browser on your device. They are not synced to an account. Download a backup if you want to move them or keep a separate copy.' },
+  { question: 'Can I download Word and PDF files?', answer: 'Yes. Export a Word .docx file for editing, or use the browser print dialog to save a PDF.' },
+];
+const structuredData = [
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: 'ClearCV', url: new URL('/', Astro.site).toString() },
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'ClearCV Resume Builder', url: new URL('/', Astro.site).toString(), description, applicationCategory: 'BusinessApplication', operatingSystem: 'Any', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((faq) => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) },
+];
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f5f7f4" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    {googleVerification && <meta name="google-site-verification" content={googleVerification} />}
+    <link rel="canonical" href={canonical.toString()} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ClearCV" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.toString()} />
+    <meta property="og:image" content={socialImage.toString()} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage.toString()} />
+    <title>{title}</title>
+    {adsEnabled && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsClient}`} crossorigin="anonymous"></script>}
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body>
+    <section class="seo-hero" aria-labelledby="page-title">
+      <div class="seo-hero-inner">
+        <p class="seo-eyebrow">FREE RESUME BUILDER FOR STUDENTS</p>
+        <h1 id="page-title">Build your first-job resume with confidence</h1>
+        <p class="seo-lede">Turn your education, projects, skills, and activities into a clear resume. Choose an ATS-friendly style, make edits in the live preview, and save an editable Word document or PDF.</p>
+        <div class="seo-benefits"><span>Free to use</span><span>No account required</span><span>Saved in your browser</span></div>
+        <a class="seo-cta" href="#builder">Start building your resume <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+    <ResumeBuilder client:load />
+    {adsEnabled && slotArticle && <div class="site-ad"><AdSlot slot={slotArticle} client={adsClient} enabled={adsEnabled} /></div>}
+    <section class="search-guide" aria-labelledby="guide-title">
+      <div class="search-guide-inner">
+        <p class="seo-eyebrow">A SIMPLE PLACE TO START</p>
+        <h2 id="guide-title">What to include in a first resume</h2>
+        <p>You can make a strong entry-level resume without a long job history. Start with your education and the most relevant evidence of what you can do.</p>
+        <div class="guide-cards">
+          <article><h3>Education and coursework</h3><p>List your school, qualification, subject, and expected graduation date. Add a few relevant courses, honors, or academic projects when they support the role.</p></article>
+          <article><h3>Projects and activities</h3><p>Describe class projects, personal work, clubs, volunteering, or sports roles. Explain your contribution and what you completed or improved.</p></article>
+          <article><h3>Skills and certificates</h3><p>Name specific tools and skills you can discuss honestly in an interview. Include certificates with the issuing organization and date.</p></article>
+        </div>
+        <h2 class="faq-title">Frequently asked questions</h2>
+        <div class="faq-list">{faqs.map((faq) => <details><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div>
+        <p class="guide-note">ClearCV uses simple formatting to help keep your resume readable. Employers use different systems and criteria, so review each application’s instructions before submitting.</p>
+      </div>
+    </section>
+    {adsEnabled && slotBottom && <div class="site-ad"><AdSlot slot={slotBottom} client={adsClient} enabled={adsEnabled} /></div>}
+    <footer class="site-footer"><span>ClearCV · A private, browser-based resume builder.</span><a href="/privacy">Privacy</a></footer>
+  </body>
+</html>
