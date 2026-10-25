@@ -72,3 +72,16 @@
 .template-card-copy>span{color:#79857e;font-size:8px;line-height:1.25}
 .template-selected{position:absolute;right:5px;top:4px;color:#347255;font-size:7px;font-weight:700}
 @media(max-width:380px){.template-picker{padding:10px}.template-grid{gap:5px}.template-card{gap:6px;padding:6px}.template-sample{width:27px;height:41px}.template-card-copy strong{font-size:9px}.template-card-copy>span{font-size:7px}}
+
+/* PDF/print output contains the CV only, without the site's landing page or guide. */
+@media print{
+  body>*:not(.app-shell),
+  .app-shell>*:not(.workspace),
+  .workspace>*:not(.preview-column),
+  .preview-column>*:not(.preview-panel),
+  .preview-panel>*:not(.paper-stage),
+  .paper-stage>*:not(.resume-paper){display:none!important}
+  html,body{width:auto!important;min-width:0!important;margin:0!important;padding:0!important;background:#fff!important;overflow:visible!important}
+  .app-shell,.workspace,.preview-column,.preview-panel,.paper-stage{display:block!important;width:100%!important;max-width:none!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:#fff!important;position:static!important;overflow:visible!important}
+  .resume-paper{display:block!important;width:100%!important;min-height:0!important;margin:0!important;padding:0!important;box-shadow:none!important}
+}
