@@ -1,6 +1,6 @@
 export type Entry = Record<string, string> & { id: string };
 export type ResumeSection = { id: string; title: string; kind: string; visible: boolean; entries: Entry[] };
-export type ResumeTemplate = 'simple' | 'classic' | 'compact' | 'modern' | 'minimal' | 'traditional' | 'professional' | 'student' | 'elegant' | 'bold';
+export type ResumeTemplate = 'simple' | 'classic' | 'compact' | 'modern' | 'minimal' | 'traditional' | 'professional' | 'student' | 'elegant' | 'bold' | 'editorial' | 'ocean' | 'copper' | 'graphite' | 'airy';
 export const resumeTemplates: { id: ResumeTemplate; name: string; description: string }[] = [
   { id: 'simple', name: 'Simple', description: 'Clean and balanced' },
   { id: 'classic', name: 'Classic', description: 'Traditional serif headings' },
@@ -12,6 +12,11 @@ export const resumeTemplates: { id: ResumeTemplate; name: string; description: s
   { id: 'student', name: 'Student', description: 'Friendly, clear, and entry-level focused' },
   { id: 'elegant', name: 'Elegant', description: 'Refined serif typography and warm details' },
   { id: 'bold', name: 'Bold', description: 'Confident headings with strong contrast' },
+  { id: 'editorial', name: 'Editorial', description: 'Literary serif with crisp rules' },
+  { id: 'ocean', name: 'Ocean', description: 'Fresh teal and open spacing' },
+  { id: 'copper', name: 'Copper', description: 'Warm accents and classic type' },
+  { id: 'graphite', name: 'Graphite', description: 'Sharp monochrome structure' },
+  { id: 'airy', name: 'Airy', description: 'Soft lines and generous space' },
 ];
 export type Resume = { id: string; name: string; updatedAt: number; template?: ResumeTemplate; sample?: boolean; sections: ResumeSection[] };
 export const sectionDefinitions: Record<string, { title: string; fields: { key: string; label: string; multiline?: boolean; placeholder?: string }[] }> = {
@@ -56,7 +61,7 @@ export function exampleResume(): Resume {
 export function cleanResume(data: unknown): Resume | null {
  if(!data||typeof data!=='object')return null; const c=data as Partial<Resume>; if(typeof c.name!=='string'||!Array.isArray(c.sections))return null;
  const sections=c.sections.filter(s=>s&&typeof s==='object'&&typeof s.title==='string'&&Array.isArray(s.entries)).map(s=>({id:typeof s.id==='string'?s.id:uid(),kind:typeof s.kind==='string'?s.kind:'custom',title:s.title,visible:s.visible!==false,entries:s.entries.filter(e=>e&&typeof e==='object').map(e=>{const row=e as Record<string,unknown>;const safe:Entry={id:typeof row.id==='string'?row.id:uid()};for(const [key,value] of Object.entries(row))if(key!=='id'&&typeof value==='string')safe[key]=value;return safe;})}));
- const validTemplates: ResumeTemplate[] = ['simple','classic','compact','modern','minimal','traditional','professional','student','elegant','bold'];
+ const validTemplates: ResumeTemplate[] = ['simple','classic','compact','modern','minimal','traditional','professional','student','elegant','bold','editorial','ocean','copper','graphite','airy'];
  return {id:typeof c.id==='string'?c.id:uid(),name:c.name,updatedAt:typeof c.updatedAt==='number'?c.updatedAt:Date.now(),template:validTemplates.includes(c.template as ResumeTemplate)?c.template as ResumeTemplate:'simple',sample:c.sample===true,sections};
 }
 

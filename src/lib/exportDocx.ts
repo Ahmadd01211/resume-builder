@@ -85,16 +85,17 @@ export async function buildResumeDocx(resume: Resume): Promise<Blob> {
   const contact = resume.sections.find((section) => section.kind === 'contact')?.entries[0];
   const children: Paragraph[] = [];
   const template = resume.template ?? 'simple';
-  const headerAlignment = ['modern', 'minimal', 'professional', 'bold'].includes(template) ? AlignmentType.LEFT : AlignmentType.CENTER;
-  const headingFont = ['classic', 'traditional', 'elegant'].includes(template) ? 'Times New Roman' : 'Arial';
-  const headingColor = ({ professional: '315B83', student: '286A50', elegant: '6C5944', bold: '263B5A' } as Record<string, string>)[template] ?? '111111';
-  const naturalCase = template === 'minimal' || template === 'elegant';
+  const headerAlignment = ['modern', 'minimal', 'professional', 'bold', 'editorial', 'ocean', 'graphite'].includes(template) ? AlignmentType.LEFT : AlignmentType.CENTER;
+  const headingFont = ['classic', 'traditional', 'elegant', 'editorial', 'copper'].includes(template) ? 'Times New Roman' : 'Arial';
+  const headingColor = ({ professional: '315B83', student: '286A50', elegant: '6C5944', bold: '263B5A', editorial: '292F2C', ocean: '17636A', copper: '9A5135', graphite: '30383E', airy: '486970' } as Record<string, string>)[template] ?? '111111';
+  const naturalCase = ['minimal', 'elegant', 'editorial', 'copper', 'airy'].includes(template);
+  const openSpacing = ['editorial', 'copper', 'airy'].includes(template);
 
   if (resume.sections.find((section) => section.kind === 'contact')?.visible !== false) {
     const name = contact?.name || 'YOUR NAME';
     children.push(new Paragraph({
       alignment: headerAlignment,
-      spacing: { after: 40 },
+      spacing: { after: openSpacing ? 80 : 40 },
       children: [run(naturalCase ? name : name.toUpperCase(), { bold: true, size: 34, font: headingFont, color: headingColor })],
     }));
     if (contact?.role) children.push(new Paragraph({ alignment: headerAlignment, spacing: { after: 40 }, children: [run(contact.role, { bold: true, font: headingFont, color: headingColor })] }));
@@ -107,7 +108,7 @@ export async function buildResumeDocx(resume: Resume): Promise<Blob> {
       if (details.length) details.push(run('  |  '));
       details.push(field.kind === 'text' ? run(field.value!) : linkedText(field.value!, field.kind));
     }
-    if (details.length) children.push(new Paragraph({ alignment: headerAlignment, spacing: { after: 180 }, children: details }));
+    if (details.length) children.push(new Paragraph({ alignment: headerAlignment, spacing: { after: openSpacing ? 240 : 180 }, children: details }));
   }
 
   for (const section of resume.sections) {
@@ -117,7 +118,7 @@ export async function buildResumeDocx(resume: Resume): Promise<Blob> {
     children.push(new Paragraph({
       heading: HeadingLevel.HEADING_1,
       keepNext: true,
-      spacing: { before: 180, after: 70 },
+      spacing: { before: openSpacing ? 230 : 180, after: 70 },
       children: [run(naturalCase ? section.title : section.title.toUpperCase(), { bold: true, size: 22, font: headingFont, color: headingColor })],
     }));
     if (section.kind === 'skills') {
