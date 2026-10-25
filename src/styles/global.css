@@ -45,3 +45,30 @@
 .resume-paper.template-bold .resume-contact{text-align:left;padding:0 0 12px 13px;border-left:4px solid #334d72;margin-bottom:17px}
 .resume-paper.template-bold .resume-contact h2{font-size:24px;font-weight:800;letter-spacing:.035em;color:#263b5a}
 .resume-paper.template-bold .resume-section h3{color:#263b5a;border-bottom:2px solid #627998;letter-spacing:.09em}
+
+.template-picker{padding:13px;margin:13px 0;border:1px solid #e2e9e3;border-radius:10px;background:#fff}
+.template-picker-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px}
+.template-picker-heading h3{margin:0;color:#304239;font:700 12px Manrope,sans-serif}
+.template-picker-heading p{margin:4px 0 0;color:#7c8981;font-size:9px;line-height:1.4}
+.template-picker-heading>span{flex:none;border-radius:999px;background:#eaf2ec;color:#4b795c;padding:4px 7px;font-size:8px;font-weight:700}
+.template-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.template-card{position:relative;display:flex;align-items:center;gap:8px;min-width:0;min-height:66px;padding:7px;border:1px solid #e5eae6;border-radius:8px;background:#fff;text-align:left;color:#34433c}
+.template-card:hover{border-color:#a9c7b2;background:#fbfdfb}
+.template-card.selected{border-color:#398263;background:#f4faf5;box-shadow:0 0 0 1px #398263}
+.template-sample{width:31px;height:45px;flex:none;display:flex;flex-direction:column;gap:3px;padding:6px 4px;border:1px solid #e3e7e3;border-radius:2px;background:#fff;box-shadow:0 1px 3px #18271d12}
+.template-sample i{display:block;height:2px;border-radius:2px;background:#c8cfca}
+.template-sample .sample-name{height:4px;width:72%;background:#4b6855}
+.template-sample .sample-line{width:65%}
+.template-sample .sample-line-long{width:100%}
+.template-sample .sample-heading{height:3px;width:58%;margin-top:2px;background:#4b6855}
+.template-sample-classic .sample-name,.template-sample-classic .sample-heading,.template-sample-traditional .sample-name,.template-sample-traditional .sample-heading,.template-sample-elegant .sample-name,.template-sample-elegant .sample-heading{background:#78654e}
+.template-sample-compact{gap:2px;padding:5px 4px}
+.template-sample-modern .sample-name,.template-sample-modern .sample-heading,.template-sample-professional .sample-name,.template-sample-professional .sample-heading{background:#315b83}
+.template-sample-minimal .sample-name,.template-sample-minimal .sample-heading{background:#7a8980}
+.template-sample-student .sample-name,.template-sample-student .sample-heading{background:#286a50}
+.template-sample-bold .sample-name,.template-sample-bold .sample-heading{height:4px;background:#263b5a}
+.template-card-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
+.template-card-copy strong{font-size:10px}
+.template-card-copy>span{color:#79857e;font-size:8px;line-height:1.25}
+.template-selected{position:absolute;right:5px;top:4px;color:#347255;font-size:7px;font-weight:700}
+@media(max-width:380px){.template-picker{padding:10px}.template-grid{gap:5px}.template-card{gap:6px;padding:6px}.template-sample{width:27px;height:41px}.template-card-copy strong{font-size:9px}.template-card-copy>span{font-size:7px}}
