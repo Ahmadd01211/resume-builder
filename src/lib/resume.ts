@@ -13,7 +13,7 @@ export const resumeTemplates: { id: ResumeTemplate; name: string; description: s
   { id: 'elegant', name: 'Elegant', description: 'Refined serif typography and warm details' },
   { id: 'bold', name: 'Bold', description: 'Confident headings with strong contrast' },
 ];
-export type Resume = { id: string; name: string; updatedAt: number; template?: ResumeTemplate; sections: ResumeSection[] };
+export type Resume = { id: string; name: string; updatedAt: number; template?: ResumeTemplate; sample?: boolean; sections: ResumeSection[] };
 export const sectionDefinitions: Record<string, { title: string; fields: { key: string; label: string; multiline?: boolean; placeholder?: string }[] }> = {
   contact: { title: 'Personal details', fields: [] },
   summary: { title: 'Professional summary', fields: [{ key: 'text', label: 'Short introduction', multiline: true, placeholder: 'A few lines about your strengths and target role.' }] },
@@ -39,11 +39,25 @@ export function starterResume(): Resume {
  resume.sections.find(s=>s.kind==='skills')!.entries=['Communication','Organization','Google Workspace'].map(name=>({...newEntry(),name,group:''}));
  resume.sections.find(s=>s.kind==='projects')!.entries=[{...newEntry(),name:'Class or personal project',organization:'Course or organization',dates:'2025',details:'Describe what you created, the skills you used, and the outcome.'}]; return resume;
 }
+/** A fictional, complete student CV users can browse and copy as a guide. */
+export function exampleResume(): Resume {
+ const resume = createResume('Example CV — Maya Chen'); resume.sample = true; resume.template = 'student';
+ const put = (kind: string, rows: Record<string,string>[]) => { const section=resume.sections.find(s=>s.kind===kind)!; section.entries=rows.map(row=>({...newEntry(),...row})); };
+ put('contact',[{name:'Maya Chen',role:'Student | Entry-level marketing assistant',email:'maya.chen@example.com',phone:'+1 555 010 2026',location:'Austin, TX',link:'linkedin.com/in/maya-chen'}]);
+ put('summary',[{text:'Organized communications student with experience creating social content for campus events and supporting customer needs in a busy retail setting. Brings clear writing, attention to detail, and practical Canva and Excel skills. Seeking an entry-level marketing or communications role.'}]);
+ put('education',[{school:'Austin Community College',qualification:'A.A. in Communication Studies',location:'Austin, TX',dates:'Expected May 2027',details:'Relevant coursework: Digital Media, Public Speaking, Business Writing'}]);
+ put('skills',[{name:'Content writing',group:'Communication'},{name:'Canva',group:'Tools'},{name:'Microsoft Excel',group:'Tools'},{name:'Customer service',group:'Professional'}]);
+ put('projects',[{name:'Campus Welcome Week Campaign',organization:'Student Activities Club',dates:'Aug 2025',link:'',details:'Created 8 social media graphics in Canva for a student welcome campaign.\nCoordinated a posting calendar with 4 club volunteers and helped increase event sign-ups by 20% compared with the prior semester.'}]);
+ put('experience',[{role:'Sales Associate',organization:'Greenway Market',location:'Austin, TX',dates:'Jun 2025 – Present',details:'Assist 30+ customers per shift with product questions and checkout.\nRestock featured products and keep displays organized, helping the team maintain a welcoming store.'}]);
+ put('certificates',[{name:'Google Digital Marketing & E-commerce Certificate',issuer:'Google / Coursera',dates:'2025',link:''}]);
+ return resume;
+}
+
 export function cleanResume(data: unknown): Resume | null {
  if(!data||typeof data!=='object')return null; const c=data as Partial<Resume>; if(typeof c.name!=='string'||!Array.isArray(c.sections))return null;
  const sections=c.sections.filter(s=>s&&typeof s==='object'&&typeof s.title==='string'&&Array.isArray(s.entries)).map(s=>({id:typeof s.id==='string'?s.id:uid(),kind:typeof s.kind==='string'?s.kind:'custom',title:s.title,visible:s.visible!==false,entries:s.entries.filter(e=>e&&typeof e==='object').map(e=>{const row=e as Record<string,unknown>;const safe:Entry={id:typeof row.id==='string'?row.id:uid()};for(const [key,value] of Object.entries(row))if(key!=='id'&&typeof value==='string')safe[key]=value;return safe;})}));
  const validTemplates: ResumeTemplate[] = ['simple','classic','compact','modern','minimal','traditional','professional','student','elegant','bold'];
- return {id:typeof c.id==='string'?c.id:uid(),name:c.name,updatedAt:typeof c.updatedAt==='number'?c.updatedAt:Date.now(),template:validTemplates.includes(c.template as ResumeTemplate)?c.template as ResumeTemplate:'simple',sections};
+ return {id:typeof c.id==='string'?c.id:uid(),name:c.name,updatedAt:typeof c.updatedAt==='number'?c.updatedAt:Date.now(),template:validTemplates.includes(c.template as ResumeTemplate)?c.template as ResumeTemplate:'simple',sample:c.sample===true,sections};
 }
 
 
