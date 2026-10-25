@@ -1,22 +1,44 @@
 export type Entry = Record<string, string> & { id: string };
 export type ResumeSection = { id: string; title: string; kind: string; visible: boolean; entries: Entry[] };
-export type ResumeTemplate = 'simple' | 'classic' | 'compact' | 'modern' | 'minimal' | 'traditional' | 'professional' | 'student' | 'elegant' | 'bold' | 'editorial' | 'ocean' | 'copper' | 'graphite' | 'airy';
-export const resumeTemplates: { id: ResumeTemplate; name: string; description: string }[] = [
-  { id: 'simple', name: 'Simple', description: 'Clean and balanced' },
-  { id: 'classic', name: 'Classic', description: 'Traditional serif headings' },
-  { id: 'compact', name: 'Compact', description: 'More content per page' },
-  { id: 'modern', name: 'Modern', description: 'Left-aligned with a subtle accent' },
-  { id: 'minimal', name: 'Minimal', description: 'Open spacing and light dividers' },
-  { id: 'traditional', name: 'Traditional', description: 'Formal, centered header' },
-  { id: 'professional', name: 'Professional', description: 'Structured with a cool blue accent' },
-  { id: 'student', name: 'Student', description: 'Friendly, clear, and entry-level focused' },
-  { id: 'elegant', name: 'Elegant', description: 'Refined serif typography and warm details' },
-  { id: 'bold', name: 'Bold', description: 'Confident headings with strong contrast' },
-  { id: 'editorial', name: 'Editorial', description: 'Literary serif with crisp rules' },
-  { id: 'ocean', name: 'Ocean', description: 'Fresh teal and open spacing' },
-  { id: 'copper', name: 'Copper', description: 'Warm accents and classic type' },
-  { id: 'graphite', name: 'Graphite', description: 'Sharp monochrome structure' },
-  { id: 'airy', name: 'Airy', description: 'Soft lines and generous space' },
+export type ResumeTemplateCategory = 'classic' | 'modern' | 'minimal' | 'bold';
+export type ResumeTemplate = 'simple' | 'classic' | 'compact' | 'modern' | 'minimal' | 'traditional' | 'professional' | 'student' | 'elegant' | 'bold' | 'editorial' | 'ocean' | 'copper' | 'graphite' | 'airy' | 'scholarly' | 'heritage' | 'ledger' | 'formal' | 'columnist' | 'skyline' | 'evergreen' | 'cobalt' | 'spruce' | 'horizon' | 'whisper' | 'linen' | 'balanced' | 'ivory' | 'quiet' | 'ember' | 'aubergine' | 'crimson' | 'midnight' | 'citrus';
+export type ResumeTemplateDefinition = { id: ResumeTemplate; name: string; description: string; category: ResumeTemplateCategory; accent: string };
+export const resumeTemplates: ResumeTemplateDefinition[] = [
+  { id: 'simple', name: 'Simple', description: 'Clean and balanced', category: 'minimal', accent: '4B6855' },
+  { id: 'classic', name: 'Classic', description: 'Traditional serif headings', category: 'classic', accent: '78654E' },
+  { id: 'compact', name: 'Compact', description: 'More content per page', category: 'minimal', accent: '52665B' },
+  { id: 'modern', name: 'Modern', description: 'Left-aligned with a subtle accent', category: 'modern', accent: '286A50' },
+  { id: 'minimal', name: 'Minimal', description: 'Open spacing and light dividers', category: 'minimal', accent: '7A8980' },
+  { id: 'traditional', name: 'Traditional', description: 'Formal, centered header', category: 'classic', accent: '707A72' },
+  { id: 'professional', name: 'Professional', description: 'Structured with a cool blue accent', category: 'modern', accent: '315B83' },
+  { id: 'student', name: 'Student', description: 'Friendly and clear', category: 'modern', accent: '286A50' },
+  { id: 'elegant', name: 'Elegant', description: 'Refined serif and warm details', category: 'classic', accent: '6C5944' },
+  { id: 'bold', name: 'Bold', description: 'Strong contrast', category: 'bold', accent: '263B5A' },
+  { id: 'editorial', name: 'Editorial', description: 'Literary serif and crisp rules', category: 'classic', accent: '292F2C' },
+  { id: 'ocean', name: 'Ocean', description: 'Fresh teal and open spacing', category: 'modern', accent: '17636A' },
+  { id: 'copper', name: 'Copper', description: 'Warm accents and classic type', category: 'classic', accent: '9A5135' },
+  { id: 'graphite', name: 'Graphite', description: 'Sharp monochrome structure', category: 'bold', accent: '30383E' },
+  { id: 'airy', name: 'Airy', description: 'Soft lines and generous space', category: 'minimal', accent: '486970' },
+  { id: 'scholarly', name: 'Scholarly', description: 'Academic serif with fine rules', category: 'classic', accent: '3F5366' },
+  { id: 'heritage', name: 'Heritage', description: 'Timeless centered masthead', category: 'classic', accent: '6A463B' },
+  { id: 'ledger', name: 'Ledger', description: 'Orderly dates and dividers', category: 'classic', accent: '52654D' },
+  { id: 'formal', name: 'Formal', description: 'Conservative and precise', category: 'classic', accent: '33404D' },
+  { id: 'columnist', name: 'Columnist', description: 'Editorial name and section lines', category: 'classic', accent: '755543' },
+  { id: 'skyline', name: 'Skyline', description: 'Urban blue geometry', category: 'modern', accent: '315D84' },
+  { id: 'evergreen', name: 'Evergreen', description: 'Deep green and clean lines', category: 'modern', accent: '245D4B' },
+  { id: 'cobalt', name: 'Cobalt', description: 'Bright blue professional look', category: 'modern', accent: '2A5FA8' },
+  { id: 'spruce', name: 'Spruce', description: 'Cool green with quiet detail', category: 'modern', accent: '36716C' },
+  { id: 'horizon', name: 'Horizon', description: 'Open blue header and spacing', category: 'modern', accent: '477C9B' },
+  { id: 'whisper', name: 'Whisper', description: 'Light rules and gentle rhythm', category: 'minimal', accent: '6B807B' },
+  { id: 'linen', name: 'Linen', description: 'Warm neutral and soft serif', category: 'minimal', accent: '867260' },
+  { id: 'balanced', name: 'Balanced', description: 'Symmetrical and understated', category: 'minimal', accent: '596876' },
+  { id: 'ivory', name: 'Ivory', description: 'Graceful type with open margins', category: 'minimal', accent: '917C65' },
+  { id: 'quiet', name: 'Quiet', description: 'Small details, ample white space', category: 'minimal', accent: '6C7970' },
+  { id: 'ember', name: 'Ember', description: 'Terracotta with bold rules', category: 'bold', accent: 'A35039' },
+  { id: 'aubergine', name: 'Aubergine', description: 'Rich plum and strong headings', category: 'bold', accent: '624765' },
+  { id: 'crimson', name: 'Crimson', description: 'Confident red accents', category: 'bold', accent: '9A3F49' },
+  { id: 'midnight', name: 'Midnight', description: 'Deep navy and crisp contrast', category: 'bold', accent: '243A56' },
+  { id: 'citrus', name: 'Citrus', description: 'Fresh olive and dark type', category: 'bold', accent: '677536' },
 ];
 export type Resume = { id: string; name: string; updatedAt: number; template?: ResumeTemplate; sample?: boolean; sections: ResumeSection[] };
 export const sectionDefinitions: Record<string, { title: string; fields: { key: string; label: string; multiline?: boolean; placeholder?: string }[] }> = {
@@ -61,8 +83,8 @@ export function exampleResume(): Resume {
 export function cleanResume(data: unknown): Resume | null {
  if(!data||typeof data!=='object')return null; const c=data as Partial<Resume>; if(typeof c.name!=='string'||!Array.isArray(c.sections))return null;
  const sections=c.sections.filter(s=>s&&typeof s==='object'&&typeof s.title==='string'&&Array.isArray(s.entries)).map(s=>({id:typeof s.id==='string'?s.id:uid(),kind:typeof s.kind==='string'?s.kind:'custom',title:s.title,visible:s.visible!==false,entries:s.entries.filter(e=>e&&typeof e==='object').map(e=>{const row=e as Record<string,unknown>;const safe:Entry={id:typeof row.id==='string'?row.id:uid()};for(const [key,value] of Object.entries(row))if(key!=='id'&&typeof value==='string')safe[key]=value;return safe;})}));
- const validTemplates: ResumeTemplate[] = ['simple','classic','compact','modern','minimal','traditional','professional','student','elegant','bold','editorial','ocean','copper','graphite','airy'];
- return {id:typeof c.id==='string'?c.id:uid(),name:c.name,updatedAt:typeof c.updatedAt==='number'?c.updatedAt:Date.now(),template:validTemplates.includes(c.template as ResumeTemplate)?c.template as ResumeTemplate:'simple',sample:c.sample===true,sections};
+ const template = resumeTemplates.find(item => item.id === c.template)?.id ?? 'simple';
+ return {id:typeof c.id==='string'?c.id:uid(),name:c.name,updatedAt:typeof c.updatedAt==='number'?c.updatedAt:Date.now(),template,sample:c.sample===true,sections};
 }
 
 

@@ -1,5 +1,6 @@
 import {
   AlignmentType,
+  BorderStyle,
   Document,
   ExternalHyperlink,
   HeadingLevel,
@@ -7,7 +8,7 @@ import {
   Paragraph,
   TextRun,
 } from 'docx';
-import type { Entry, Resume, ResumeSection } from './resume';
+import { resumeTemplates, type Entry, type Resume, type ResumeSection } from './resume';
 
 const BODY_SIZE = 20; // docx uses half-points: 20 = 10 pt
 const run = (text: string, options: { bold?: boolean; italics?: boolean; size?: number; style?: string; font?: string; color?: string } = {}) =>
@@ -85,18 +86,23 @@ export async function buildResumeDocx(resume: Resume): Promise<Blob> {
   const contact = resume.sections.find((section) => section.kind === 'contact')?.entries[0];
   const children: Paragraph[] = [];
   const template = resume.template ?? 'simple';
-  const headerAlignment = ['modern', 'minimal', 'professional', 'bold', 'editorial', 'ocean', 'graphite'].includes(template) ? AlignmentType.LEFT : AlignmentType.CENTER;
-  const headingFont = ['classic', 'traditional', 'elegant', 'editorial', 'copper'].includes(template) ? 'Times New Roman' : 'Arial';
-  const headingColor = ({ professional: '315B83', student: '286A50', elegant: '6C5944', bold: '263B5A', editorial: '292F2C', ocean: '17636A', copper: '9A5135', graphite: '30383E', airy: '486970' } as Record<string, string>)[template] ?? '111111';
-  const naturalCase = ['minimal', 'elegant', 'editorial', 'copper', 'airy'].includes(template);
-  const openSpacing = ['editorial', 'copper', 'airy'].includes(template);
+  const design = resumeTemplates.find(item => item.id === template) ?? resumeTemplates[0];
+  const leftAligned = ['modern', 'minimal', 'professional', 'bold', 'editorial', 'ocean', 'graphite', 'scholarly', 'ledger', 'columnist', 'skyline', 'evergreen', 'cobalt', 'spruce', 'whisper', 'ivory', 'quiet', 'ember', 'aubergine', 'crimson', 'midnight', 'citrus'].includes(template);
+  const headerAlignment = leftAligned ? AlignmentType.LEFT : AlignmentType.CENTER;
+  const serif = ['classic', 'traditional', 'elegant', 'editorial', 'copper', 'scholarly', 'heritage', 'ledger', 'formal', 'columnist', 'linen', 'ivory'].includes(template);
+  const headingFont = serif ? 'Times New Roman' : 'Arial';
+  const headingColor = design.accent;
+  const naturalCase = ['minimal', 'elegant', 'editorial', 'copper', 'airy', 'scholarly', 'heritage', 'ledger', 'columnist', 'whisper', 'linen', 'balanced', 'ivory', 'quiet'].includes(template);
+  const openSpacing = ['editorial', 'copper', 'airy', 'heritage', 'columnist', 'horizon', 'whisper', 'linen', 'balanced', 'ivory', 'quiet'].includes(template);
+  const headingSize = design.category === 'bold' ? 36 : design.category === 'minimal' ? 32 : 34;
+  const sectionRule = { bottom: { style: BorderStyle.SINGLE, color: headingColor, size: design.category === 'bold' ? 12 : design.category === 'minimal' ? 3 : 6, space: 3 } };
 
   if (resume.sections.find((section) => section.kind === 'contact')?.visible !== false) {
     const name = contact?.name || 'YOUR NAME';
     children.push(new Paragraph({
       alignment: headerAlignment,
       spacing: { after: openSpacing ? 80 : 40 },
-      children: [run(naturalCase ? name : name.toUpperCase(), { bold: true, size: 34, font: headingFont, color: headingColor })],
+      children: [run(naturalCase ? name : name.toUpperCase(), { bold: true, size: headingSize, font: headingFont, color: headingColor })],
     }));
     if (contact?.role) children.push(new Paragraph({ alignment: headerAlignment, spacing: { after: 40 }, children: [run(contact.role, { bold: true, font: headingFont, color: headingColor })] }));
     const details: (TextRun | ExternalHyperlink)[] = [];
@@ -119,7 +125,8 @@ export async function buildResumeDocx(resume: Resume): Promise<Blob> {
       heading: HeadingLevel.HEADING_1,
       keepNext: true,
       spacing: { before: openSpacing ? 230 : 180, after: 70 },
-      children: [run(naturalCase ? section.title : section.title.toUpperCase(), { bold: true, size: 22, font: headingFont, color: headingColor })],
+      border: sectionRule,
+      children: [run(naturalCase ? section.title : section.title.toUpperCase(), { bold: true, size: design.category === 'bold' ? 23 : 22, font: headingFont, color: headingColor })],
     }));
     if (section.kind === 'skills') {
       children.push(new Paragraph({

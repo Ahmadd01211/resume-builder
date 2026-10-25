@@ -128,3 +128,94 @@
 .template-sample-airy .sample-name,.template-sample-airy .sample-heading{background:#688b91}
 .template-sample-airy{padding-top:9px}
 @media print{.resume-paper{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+
+/* A compact gallery keeps the design picker usable as the collection grows. */
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.template-current{display:flex;align-items:center;gap:11px;padding:10px;border:1px solid #dce7df;border-radius:9px;background:#f8fbf8}
+.template-current .template-sample{width:39px;height:54px}
+.template-current-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:2px}
+.template-current-copy>span{font-size:8px;font-weight:800;letter-spacing:.11em;color:#5d8b6e}
+.template-current-copy strong{font-size:12px;color:#283c30}
+.template-current-copy small{font-size:9px;color:#728178;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.template-browse{flex:none;border:1px solid #b9cfbf;border-radius:7px;background:#fff;color:#286a50;padding:8px 10px;font-size:9px;font-weight:800}
+.template-browse:hover{background:#edf7ef}
+.template-gallery{border-top:1px solid #e7eee8;margin-top:12px;padding-top:12px}
+.template-search{display:block}
+.template-search input{width:100%;height:35px;border:1px solid #dce5de;border-radius:7px;padding:0 11px;background:#fff;color:#304139;font-size:11px}
+.template-search input::placeholder{color:#89968d}
+.template-categories{display:flex;flex-wrap:wrap;gap:5px;margin:9px 0 5px}
+.template-categories button{border:1px solid #e0e9e2;border-radius:999px;background:#fff;color:#5e7164;padding:5px 9px;font-size:9px;font-weight:700}
+.template-categories button:hover{border-color:#94b79d}
+.template-categories button.active{background:#286a50;border-color:#286a50;color:#fff}
+.template-results{font-size:9px;color:#849088;margin:8px 1px}
+.template-gallery .template-grid{max-height:342px;overflow:auto;overscroll-behavior:contain;padding:2px 3px 3px 1px;scrollbar-color:#c8d8ce transparent}
+.template-empty{font-size:10px;color:#7b8980;text-align:center;padding:15px 5px}
+.template-sample .sample-name,.template-sample .sample-heading{background:var(--template-accent,#4b6855)}
+@media(max-width:380px){.template-current{flex-wrap:wrap}.template-browse{margin-left:auto}.template-current-copy{flex-basis:calc(100% - 56px)}}
+
+/* Twenty additional designs share readable single-column text and distinct accents. */
+.resume-paper.template-scholarly{--cv-accent:#3f5366;--cv-rule:#bac6d0}
+.resume-paper.template-heritage{--cv-accent:#6a463b;--cv-rule:#c8a99d}
+.resume-paper.template-ledger{--cv-accent:#52654d;--cv-rule:#bac7b5}
+.resume-paper.template-formal{--cv-accent:#33404d;--cv-rule:#acb6bf}
+.resume-paper.template-columnist{--cv-accent:#755543;--cv-rule:#ceb9aa}
+.resume-paper.template-skyline{--cv-accent:#315d84;--cv-rule:#a9c3d9}
+.resume-paper.template-evergreen{--cv-accent:#245d4b;--cv-rule:#9ebdaf}
+.resume-paper.template-cobalt{--cv-accent:#2a5fa8;--cv-rule:#a1bfe4}
+.resume-paper.template-spruce{--cv-accent:#36716c;--cv-rule:#a9ccca}
+.resume-paper.template-horizon{--cv-accent:#477c9b;--cv-rule:#b4d0dc}
+.resume-paper.template-whisper{--cv-accent:#6b807b;--cv-rule:#d3ddda}
+.resume-paper.template-linen{--cv-accent:#867260;--cv-rule:#ded2c6}
+.resume-paper.template-balanced{--cv-accent:#596876;--cv-rule:#d0d9df}
+.resume-paper.template-ivory{--cv-accent:#917c65;--cv-rule:#dfd6cb}
+.resume-paper.template-quiet{--cv-accent:#6c7970;--cv-rule:#dce3dd}
+.resume-paper.template-ember{--cv-accent:#a35039;--cv-rule:#d9ac9e}
+.resume-paper.template-aubergine{--cv-accent:#624765;--cv-rule:#c3adc5}
+.resume-paper.template-crimson{--cv-accent:#9a3f49;--cv-rule:#d5a9ae}
+.resume-paper.template-midnight{--cv-accent:#243a56;--cv-rule:#a5b3c2}
+.resume-paper.template-citrus{--cv-accent:#677536;--cv-rule:#c1c99b}
+.resume-paper:is(.template-scholarly,.template-heritage,.template-ledger,.template-formal,.template-columnist) .resume-contact h2{font-family:Georgia,'Times New Roman',serif;color:var(--cv-accent);text-transform:none;letter-spacing:.015em;font-size:25px}
+.resume-paper:is(.template-scholarly,.template-heritage,.template-ledger,.template-formal,.template-columnist) .resume-section h3{font-family:Georgia,'Times New Roman',serif;color:var(--cv-accent);text-transform:none;letter-spacing:.025em;border-bottom:1px solid var(--cv-rule)}
+.resume-paper:is(.template-skyline,.template-evergreen,.template-cobalt,.template-spruce,.template-horizon) .resume-contact{text-align:left;padding-bottom:13px;margin-bottom:18px}
+.resume-paper:is(.template-skyline,.template-evergreen,.template-cobalt,.template-spruce,.template-horizon) .resume-contact h2{color:var(--cv-accent);font-size:24px;letter-spacing:.025em}
+.resume-paper:is(.template-skyline,.template-evergreen,.template-cobalt,.template-spruce,.template-horizon) .resume-section h3{color:var(--cv-accent);border-bottom:1px solid var(--cv-rule);letter-spacing:.09em}
+.resume-paper:is(.template-whisper,.template-linen,.template-balanced,.template-ivory,.template-quiet){padding-top:56px;padding-bottom:56px}
+.resume-paper:is(.template-whisper,.template-linen,.template-balanced,.template-ivory,.template-quiet) .resume-contact{margin-bottom:25px}
+.resume-paper:is(.template-whisper,.template-linen,.template-balanced,.template-ivory,.template-quiet) .resume-contact h2{color:var(--cv-accent);text-transform:none;letter-spacing:.02em;font-size:24px;font-weight:600}
+.resume-paper:is(.template-whisper,.template-linen,.template-balanced,.template-ivory,.template-quiet) .resume-section{margin-top:19px}
+.resume-paper:is(.template-whisper,.template-linen,.template-balanced,.template-ivory,.template-quiet) .resume-section h3{color:var(--cv-accent);text-transform:none;letter-spacing:.04em;border-bottom:1px solid var(--cv-rule)}
+.resume-paper:is(.template-ember,.template-aubergine,.template-crimson,.template-midnight,.template-citrus) .resume-contact{text-align:left;margin-bottom:18px}
+.resume-paper:is(.template-ember,.template-aubergine,.template-crimson,.template-midnight,.template-citrus) .resume-contact h2{color:var(--cv-accent);font-size:25px;font-weight:800;letter-spacing:.025em}
+.resume-paper:is(.template-ember,.template-aubergine,.template-crimson,.template-midnight,.template-citrus) .resume-section h3{color:var(--cv-accent);border-bottom:2px solid var(--cv-accent);letter-spacing:.1em}
+.resume-paper.template-scholarly .resume-contact{text-align:left;border-bottom:2px solid var(--cv-accent);padding-bottom:12px;margin-bottom:18px}
+.resume-paper.template-heritage .resume-contact{border-bottom:3px double var(--cv-accent);padding-bottom:15px;margin-bottom:20px}
+.resume-paper.template-ledger .resume-contact{text-align:left;border-left:3px solid var(--cv-accent);padding-left:12px;margin-bottom:19px}
+.resume-paper.template-ledger .resume-entry-top{border-bottom:1px dotted var(--cv-rule);padding-bottom:2px}
+.resume-paper.template-formal .resume-contact{border-top:1px solid var(--cv-accent);border-bottom:1px solid var(--cv-accent);padding:11px 0;margin-bottom:17px}
+.resume-paper.template-formal .resume-contact h2{text-transform:uppercase;letter-spacing:.09em;font-size:22px}
+.resume-paper.template-columnist .resume-contact{text-align:left;border-top:4px solid var(--cv-accent);padding-top:12px;margin-bottom:18px}
+.resume-paper.template-columnist .resume-role{font-style:italic}
+.resume-paper.template-skyline .resume-contact{border-top:4px solid var(--cv-accent);padding-top:12px}
+.resume-paper.template-evergreen .resume-contact{border-left:4px solid var(--cv-accent);padding-left:12px}
+.resume-paper.template-cobalt .resume-contact{border-bottom:3px solid var(--cv-accent)}
+.resume-paper.template-spruce .resume-contact{border-bottom:1px solid var(--cv-rule)}
+.resume-paper.template-spruce .resume-section h3{text-transform:none;letter-spacing:.025em}
+.resume-paper.template-horizon .resume-contact{text-align:center;border-bottom:2px solid var(--cv-accent)}
+.resume-paper.template-whisper .resume-contact{text-align:left}
+.resume-paper.template-whisper .resume-section h3{border-bottom:0;border-left:2px solid var(--cv-rule);padding-left:8px}
+.resume-paper.template-linen .resume-contact h2,.resume-paper.template-linen .resume-section h3{font-family:Georgia,'Times New Roman',serif}
+.resume-paper.template-balanced .resume-contact{border-top:1px solid var(--cv-rule);border-bottom:1px solid var(--cv-rule);padding:13px 0}
+.resume-paper.template-balanced .resume-section h3{text-align:center}
+.resume-paper.template-ivory .resume-contact{text-align:left}
+.resume-paper.template-ivory .resume-contact h2,.resume-paper.template-ivory .resume-section h3{font-family:Georgia,'Times New Roman',serif;font-weight:500}
+.resume-paper.template-quiet .resume-contact{text-align:left}
+.resume-paper.template-quiet .resume-section h3{border-bottom:0;letter-spacing:.12em;text-transform:uppercase}
+.resume-paper.template-ember .resume-contact{border-top:5px solid var(--cv-accent);padding-top:12px}
+.resume-paper.template-aubergine .resume-contact{border-left:5px solid var(--cv-accent);padding-left:13px}
+.resume-paper.template-crimson .resume-contact{border-bottom:4px solid var(--cv-accent);padding-bottom:13px}
+.resume-paper.template-midnight .resume-contact{border-top:4px solid var(--cv-accent);border-bottom:1px solid var(--cv-accent);padding:12px 0}
+.resume-paper.template-citrus .resume-contact{border-left:5px solid var(--cv-accent);padding-left:13px}
+.resume-paper.template-citrus .resume-section h3{text-transform:none;letter-spacing:.025em}
+.template-sample:is(.template-sample-scholarly,.template-sample-columnist,.template-sample-skyline,.template-sample-ember,.template-sample-midnight){border-top:3px solid var(--template-accent)}
+.template-sample:is(.template-sample-heritage,.template-sample-formal,.template-sample-cobalt,.template-sample-horizon,.template-sample-crimson,.template-sample-balanced){border-bottom:3px solid var(--template-accent)}
+.template-sample:is(.template-sample-ledger,.template-sample-evergreen,.template-sample-aubergine,.template-sample-citrus){border-left:3px solid var(--template-accent)}
