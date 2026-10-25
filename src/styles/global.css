@@ -219,3 +219,47 @@
 .template-sample:is(.template-sample-scholarly,.template-sample-columnist,.template-sample-skyline,.template-sample-ember,.template-sample-midnight){border-top:3px solid var(--template-accent)}
 .template-sample:is(.template-sample-heritage,.template-sample-formal,.template-sample-cobalt,.template-sample-horizon,.template-sample-crimson,.template-sample-balanced){border-bottom:3px solid var(--template-accent)}
 .template-sample:is(.template-sample-ledger,.template-sample-evergreen,.template-sample-aubergine,.template-sample-citrus){border-left:3px solid var(--template-accent)}
+
+/* These tokens also drive Word output through getTemplateStyle(). */
+.resume-paper[data-template] .resume-contact{text-align:var(--cv-align)}
+.resume-paper[data-template] .resume-contact h2{color:var(--cv-accent);font-family:var(--cv-heading-font);text-transform:var(--cv-name-case)}
+.resume-paper[data-template] .resume-section h3{color:var(--cv-accent);font-family:var(--cv-heading-font);text-transform:var(--cv-section-case)}
+
+.template-current-actions{display:flex;flex:none;gap:6px}
+.template-option{position:relative;min-width:0}
+.template-option .template-card{width:100%;min-height:80px;padding-bottom:28px}
+.template-preview-link{position:absolute;right:9px;bottom:5px;min-height:24px;padding:2px 3px;border:0;background:transparent;color:#286a50;font-size:9px;font-weight:800}
+.template-preview-link:hover{text-decoration:underline}
+.design-modal-backdrop{position:fixed;inset:0;z-index:100;background:rgba(20,35,27,.65);display:flex;align-items:center;justify-content:center;padding:12px}
+.design-modal{display:flex;flex-direction:column;width:min(100%,760px);max-height:calc(100dvh - 24px);overflow:hidden;border-radius:12px;background:#fff;box-shadow:0 24px 80px #12231b55}
+.design-modal-header{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:15px 18px;border-bottom:1px solid #e4eae5}
+.design-modal-header span{font-size:8px;font-weight:800;letter-spacing:.13em;color:#438162}
+.design-modal-header h2{margin:3px 0;font:750 20px Manrope,sans-serif;color:#25342c}
+.design-modal-header p{margin:0;color:#748078;font-size:10px}
+.design-modal-close{width:34px;height:34px;flex:none;border:0;border-radius:7px;background:#f0f4f1;color:#425749;font-size:22px;line-height:1}
+.design-modal-stage{min-height:0;overflow:auto;background:#e9eeea;padding:22px;display:flex;justify-content:center}
+.design-modal-stage .resume-paper{flex:none;width:min(100%,570px);min-height:720px;box-shadow:0 4px 22px #21352729}
+.design-modal-actions{display:flex;justify-content:flex-end;gap:8px;padding:11px 18px;border-top:1px solid #e4eae5;background:#fff}
+@media(max-width:760px){.template-current-actions{flex-wrap:wrap;justify-content:flex-end}.template-browse,.template-preview-link{min-height:32px}.template-categories button{min-height:32px}.template-option .template-card{min-height:88px}.design-modal-backdrop{padding:0}.design-modal{width:100%;height:100dvh;max-height:100dvh;border-radius:0}.design-modal-stage{padding:14px 7px}.design-modal-stage .resume-paper{width:min(100%,570px);min-height:680px}.design-modal-actions{padding:11px 12px calc(11px + env(safe-area-inset-bottom))}.design-modal-actions .button{min-height:40px}}
+@media(max-width:380px){.template-current-actions{width:100%}.template-current-actions .template-browse{flex:1}}
+@media print{.design-modal-backdrop{display:none!important}}
+
+.backup-card{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;padding:11px;border:1px solid #dce9df;border-radius:8px;background:#f7faf7}
+.backup-card.backup-reminder{border-color:#e6dfc8;background:#fcfaf2}
+.backup-card strong{font-size:10px;color:#354b3a}
+.backup-card p{margin:3px 0 0;color:#728078;font-size:9px;line-height:1.45}
+.backup-actions{display:flex;flex:none;align-items:center;gap:7px;flex-direction:column}
+.backup-actions .button{height:32px;padding:0 9px;font-size:9px}
+.backup-persist{border:0;background:transparent;color:#377757;font-size:8px;font-weight:700;text-decoration:underline;text-underline-offset:2px}
+@media(max-width:760px){.backup-card{align-items:flex-start;flex-direction:column}.backup-actions{width:100%;align-items:flex-start;flex-direction:row;flex-wrap:wrap}.backup-actions .button,.backup-persist{min-height:36px}}
+
+/* Comfortable pointer targets and legible form fields on narrow screens. */
+.section-head{min-height:52px}
+.drag-handle{width:28px;height:30px;display:grid;place-items:center;flex:none}
+.reorder-buttons button{width:28px;height:24px}
+.visibility-toggle{width:32px;height:32px;flex:none}
+.section-toggle{min-height:44px}
+.entry-heading button{min-height:30px;padding:4px 7px}
+.preview-tools button{min-width:32px;min-height:32px}
+.template-preview-link{min-height:28px}
+@media(max-width:760px){.section-head{min-height:56px}.drag-handle{display:none}.reorder-buttons button{width:27px;height:26px}.section-toggle{min-height:52px}.field>span{font-size:10px}.field input,.field textarea{min-height:44px;font-size:16px}.field textarea{min-height:88px}.mobile-tabs button{height:38px}.template-card{min-height:72px}}

@@ -8,7 +8,8 @@ import {
   Paragraph,
   TextRun,
 } from 'docx';
-import { resumeTemplates, type Entry, type Resume, type ResumeSection } from './resume';
+import type { Entry, Resume, ResumeSection } from './resume';
+import { getTemplateStyle } from './templateStyle';
 
 const BODY_SIZE = 20; // docx uses half-points: 20 = 10 pt
 const run = (text: string, options: { bold?: boolean; italics?: boolean; size?: number; style?: string; font?: string; color?: string } = {}) =>
@@ -85,24 +86,18 @@ function makeEntry(section: ResumeSection, entry: Entry): Paragraph[] {
 export async function buildResumeDocx(resume: Resume): Promise<Blob> {
   const contact = resume.sections.find((section) => section.kind === 'contact')?.entries[0];
   const children: Paragraph[] = [];
-  const template = resume.template ?? 'simple';
-  const design = resumeTemplates.find(item => item.id === template) ?? resumeTemplates[0];
-  const leftAligned = ['modern', 'minimal', 'professional', 'bold', 'editorial', 'ocean', 'graphite', 'scholarly', 'ledger', 'columnist', 'skyline', 'evergreen', 'cobalt', 'spruce', 'whisper', 'ivory', 'quiet', 'ember', 'aubergine', 'crimson', 'midnight', 'citrus'].includes(template);
-  const headerAlignment = leftAligned ? AlignmentType.LEFT : AlignmentType.CENTER;
-  const serif = ['classic', 'traditional', 'elegant', 'editorial', 'copper', 'scholarly', 'heritage', 'ledger', 'formal', 'columnist', 'linen', 'ivory'].includes(template);
-  const headingFont = serif ? 'Times New Roman' : 'Arial';
+  const design = getTemplateStyle(resume.template);
+  const headerAlignment = design.alignment === 'left' ? AlignmentType.LEFT : AlignmentType.CENTER;
+  const headingFont = design.headingFont;
   const headingColor = design.accent;
-  const naturalCase = ['minimal', 'elegant', 'editorial', 'copper', 'airy', 'scholarly', 'heritage', 'ledger', 'columnist', 'whisper', 'linen', 'balanced', 'ivory', 'quiet'].includes(template);
-  const openSpacing = ['editorial', 'copper', 'airy', 'heritage', 'columnist', 'horizon', 'whisper', 'linen', 'balanced', 'ivory', 'quiet'].includes(template);
-  const headingSize = design.category === 'bold' ? 36 : design.category === 'minimal' ? 32 : 34;
-  const sectionRule = { bottom: { style: BorderStyle.SINGLE, color: headingColor, size: design.category === 'bold' ? 12 : design.category === 'minimal' ? 3 : 6, space: 3 } };
+  const sectionRule = { bottom: { style: BorderStyle.SINGLE, color: headingColor, size: design.ruleSize, space: 3 } };
 
   if (resume.sections.find((section) => section.kind === 'contact')?.visible !== false) {
     const name = contact?.name || 'YOUR NAME';
     children.push(new Paragraph({
       alignment: headerAlignment,
-      spacing: { after: openSpacing ? 80 : 40 },
-      children: [run(naturalCase ? name : name.toUpperCase(), { bold: true, size: headingSize, font: headingFont, color: headingColor })],
+      spacing: { after: design.openSpacing ? 80 : 40 },
+      children: [run(design.naturalNameCase ? name : name.toUpperCase(), { bold: true, size: design.nameSize, font: headingFont, color: headingColor })],
     }));
     if (contact?.role) children.push(new Paragraph({ alignment: headerAlignment, spacing: { after: 40 }, children: [run(contact.role, { bold: true, font: headingFont, color: headingColor })] }));
     const details: (TextRun | ExternalHyperlink)[] = [];
@@ -114,7 +109,7 @@ export async function buildResumeDocx(resume: Resume): Promise<Blob> {
       if (details.length) details.push(run('  |  '));
       details.push(field.kind === 'text' ? run(field.value!) : linkedText(field.value!, field.kind));
     }
-    if (details.length) children.push(new Paragraph({ alignment: headerAlignment, spacing: { after: openSpacing ? 240 : 180 }, children: details }));
+    if (details.length) children.push(new Paragraph({ alignment: headerAlignment, spacing: { after: design.openSpacing ? 240 : 180 }, children: details }));
   }
 
   for (const section of resume.sections) {
@@ -124,9 +119,9 @@ export async function buildResumeDocx(resume: Resume): Promise<Blob> {
     children.push(new Paragraph({
       heading: HeadingLevel.HEADING_1,
       keepNext: true,
-      spacing: { before: openSpacing ? 230 : 180, after: 70 },
+      spacing: { before: design.openSpacing ? 230 : 180, after: 70 },
       border: sectionRule,
-      children: [run(naturalCase ? section.title : section.title.toUpperCase(), { bold: true, size: design.category === 'bold' ? 23 : 22, font: headingFont, color: headingColor })],
+      children: [run(design.naturalSectionCase ? section.title : section.title.toUpperCase(), { bold: true, size: design.sectionSize, font: headingFont, color: headingColor })],
     }));
     if (section.kind === 'skills') {
       children.push(new Paragraph({

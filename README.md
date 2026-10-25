@@ -8,19 +8,21 @@ A browser-first, ATS-friendly resume builder for students and first-time job see
 2. In this folder, run `npm install`.
 3. Run `npm run dev` and open the local address shown in the terminal.
 
+Run `npm run typecheck` and `npm run build` before publishing changes.
+
 ## What is included
 
 - Reusable resume sections: personal details, summary, education, skills, projects, experience, certificates, volunteering, awards and activities, languages, references, and custom sections.
 - Add entries, hide sections, rename custom sections, and drag sections to reorder them.
-- Ten selectable, single-column resume designs styled consistently in the live preview, PDF/print, and Word export.
+- 35 selectable, single-column resume designs, with category filters, search, and a full page preview before applying a design.
 - Basic resume completeness checklist.
 - Browser-local autosave and multiple resumes through IndexedDB.
-- JSON backup and restore so a resume can be moved between devices.
+- JSON backup and restore for all resumes, with a visible backup reminder and an option to request persistent browser storage when supported.
 - Browser print-to-PDF with print styles designed for selectable text and ATS readability.
 - Client-side Word (.docx) export with standard headings, editable text, current section order, and clickable web/email/phone links.
-- Responsive editor for phones and larger screens.
+- Responsive editor with larger touch controls and readable phone-sized form fields.
 
-Resume content stays in the browser unless the user downloads a backup. This version has no login, server database, AI service, or cross-device sync.
+Resume content stays in the browser unless the user downloads a backup. Persistent browser storage can reduce automatic eviction but cannot protect against the user clearing site data. Download a backup file regularly. This version has no login, server database, AI service, or cross-device sync.
 
 ## Deploy to Netlify
 
@@ -28,8 +30,11 @@ Connect this folder to a Netlify site. Build command: `npm run build`. Publish d
 
 ## Project structure
 
-- `src/ui/ResumeBuilder.tsx` — editor, resume management, preview, backup/restore.
+- `src/ui/ResumeBuilder.tsx` - editor state, resume management, backup/restore, and exports.
+- `src/ui/TemplatePicker.tsx` - searchable design gallery and full page preview.
+- `src/ui/ResumePaper.tsx`, `SectionEditor.tsx`, `BackupCard.tsx`, and `Checklist.tsx` - focused UI components.
 - `src/lib/resume.ts` — reusable section definitions and resume data model.
+- `src/lib/templateStyle.ts` - style settings shared by the live preview and Word export.
 - `src/lib/db.ts` — local IndexedDB storage.
 - `src/styles/global.css` — responsive screen and PDF print styles.
 - `src/pages/index.astro` — public homepage, metadata, structured data, and resume app entry.
