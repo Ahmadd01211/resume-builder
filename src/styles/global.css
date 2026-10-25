@@ -30,3 +30,18 @@
 .resume-paper.template-traditional .resume-contact h2{font-family:Georgia,'Times New Roman',serif;font-weight:700;letter-spacing:.035em}
 .resume-paper.template-traditional .resume-section h3{font-family:Georgia,'Times New Roman',serif;text-transform:uppercase;letter-spacing:.07em;border-bottom:1px solid #707a72}
 @media(max-width:760px){.resume-paper.template-minimal{padding-top:40px;padding-bottom:40px}}
+
+/* Four additional restrained layouts. Every template keeps a single text column. */
+.resume-paper.template-professional .resume-contact{text-align:left;padding-bottom:13px;border-bottom:2px solid #315b83;margin-bottom:16px}
+.resume-paper.template-professional .resume-contact h2{font-size:23px;color:#213f5d;letter-spacing:.025em}
+.resume-paper.template-professional .resume-section h3{color:#315b83;border-bottom:1px solid #a9bfd1;letter-spacing:.09em}
+.resume-paper.template-student .resume-contact{margin-bottom:16px}
+.resume-paper.template-student .resume-contact h2{font-size:22px;color:#286a50;letter-spacing:.04em}
+.resume-paper.template-student .resume-section{margin-top:12px}
+.resume-paper.template-student .resume-section h3{color:#286a50;border-bottom:1px solid #bed2c4;letter-spacing:.07em}
+.resume-paper.template-elegant .resume-contact{text-align:center;padding-bottom:12px;border-bottom:1px solid #c7b99f;margin-bottom:18px}
+.resume-paper.template-elegant .resume-contact h2{font-family:Georgia,'Times New Roman',serif;text-transform:none;font-size:25px;font-weight:500;letter-spacing:.015em;color:#554637}
+.resume-paper.template-elegant .resume-section h3{font-family:Georgia,'Times New Roman',serif;text-transform:none;color:#6c5944;letter-spacing:.035em;border-bottom:1px solid #d8cdbb}
+.resume-paper.template-bold .resume-contact{text-align:left;padding:0 0 12px 13px;border-left:4px solid #334d72;margin-bottom:17px}
+.resume-paper.template-bold .resume-contact h2{font-size:24px;font-weight:800;letter-spacing:.035em;color:#263b5a}
+.resume-paper.template-bold .resume-section h3{color:#263b5a;border-bottom:2px solid #627998;letter-spacing:.09em}
