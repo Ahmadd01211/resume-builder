@@ -12,7 +12,8 @@ A browser-first, ATS-friendly resume builder for students and first-time job see
 
 - Reusable resume sections: personal details, summary, education, skills, projects, experience, certificates, volunteering, awards and activities, languages, references, and custom sections.
 - Add entries, hide sections, rename custom sections, and drag sections to reorder them.
-- Live, one-column resume preview and a basic completeness checklist.
+- Ten selectable, single-column resume designs styled consistently in the live preview, PDF/print, and Word export.
+- Basic resume completeness checklist.
 - Browser-local autosave and multiple resumes through IndexedDB.
 - JSON backup and restore so a resume can be moved between devices.
 - Browser print-to-PDF with print styles designed for selectable text and ATS readability.
