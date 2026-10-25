@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">ClearCV Resume Builder</title><desc id="desc">A clean resume preview beside the ClearCV resume builder.</desc>
+<rect width="1200" height="630" fill="#f1f5f0"/><circle cx="1040" cy="-24" r="260" fill="#e2eee4"/><circle cx="1140" cy="620" r="200" fill="#e6efe8"/>
+<rect x="78" y="70" width="54" height="54" rx="17" fill="#286a50"/><text x="105" y="108" fill="#fff" font-family="Arial,sans-serif" font-size="36" font-weight="700" text-anchor="middle">c</text>
+<text x="150" y="108" fill="#20312a" font-family="Arial,sans-serif" font-size="32" font-weight="700">clearcv</text>
+<text x="78" y="242" fill="#357455" font-family="Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="3">FREE RESUME BUILDER</text>
+<text x="78" y="315" fill="#1e2c26" font-family="Arial,sans-serif" font-size="55" font-weight="700">Build your first-job</text><text x="78" y="378" fill="#1e2c26" font-family="Arial,sans-serif" font-size="55" font-weight="700">resume with confidence</text>
+<text x="78" y="435" fill="#69776f" font-family="Arial,sans-serif" font-size="22">ATS-friendly styles · PDF and Word export · Saved on your device</text>
+<rect x="785" y="118" width="320" height="418" rx="14" fill="#fff" stroke="#dde6df"/><text x="945" y="177" fill="#26352d" font-family="Arial,sans-serif" font-size="24" font-weight="700" text-anchor="middle">YOUR NAME</text><text x="945" y="204" fill="#66736b" font-family="Arial,sans-serif" font-size="12" text-anchor="middle">City · Email · Phone</text>
+<path d="M825 232h240" stroke="#89958d"/><text x="825" y="260" fill="#26352d" font-family="Arial,sans-serif" font-size="13" font-weight="700">EDUCATION</text><path d="M825 270h240M825 285h198M825 300h222" stroke="#d8dfda" stroke-width="4" stroke-linecap="round"/>
+<text x="825" y="342" fill="#26352d" font-family="Arial,sans-serif" font-size="13" font-weight="700">PROJECTS</text><path d="M825 352h240M825 367h215M825 382h232M835 398h215M835 412h198" stroke="#d8dfda" stroke-width="4" stroke-linecap="round"/>
+<text x="825" y="454" fill="#26352d" font-family="Arial,sans-serif" font-size="13" font-weight="700">SKILLS</text><path d="M825 464h240M825 479h222M825 494h202" stroke="#d8dfda" stroke-width="4" stroke-linecap="round"/>
+</svg>
