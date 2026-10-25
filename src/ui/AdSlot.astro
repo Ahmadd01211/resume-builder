@@ -1,0 +1,13 @@
+---
+interface Props {
+  slot?: string;
+  client?: string;
+  enabled?: boolean;
+}
+const { slot = '', client = '', enabled = false } = Astro.props;
+const ready = enabled && /^ca-pub-\d{16}$/.test(client) && /^\d+$/.test(slot);
+---
+{ready && <aside class="ad-slot" aria-label="Advertisement">
+  <ins class="adsbygoogle" style="display:block" data-ad-client={client} data-ad-slot={slot} data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script is:inline>(window.adsbygoogle = window.adsbygoogle || []).push({});</script>
+</aside>}
