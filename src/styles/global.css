@@ -91,3 +91,5 @@
 
 /* On narrow screens keep the builder toolbar compact and its controls grouped. */
 @media(max-width:760px){.topbar{justify-content:space-between}.top-actions{margin-left:auto;flex:0 0 auto}.brand{min-width:0}.main-nav{display:none}}
+
+.button-icon{width:14px;height:14px;flex:none;display:block}.download-icon{width:15px;height:15px}.menu-trigger,.export-trigger{gap:7px}
