@@ -49,16 +49,16 @@ const structuredData = [
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
+    <ResumeBuilder client:load />
     <section class="seo-hero" aria-labelledby="page-title">
       <div class="seo-hero-inner">
         <p class="seo-eyebrow">FREE RESUME BUILDER FOR STUDENTS</p>
-        <h1 id="page-title">Build your first-job resume with confidence</h1>
+        <h2 id="page-title">Build your first-job resume with confidence</h2>
         <p class="seo-lede">Turn your education, projects, skills, and activities into a clear resume. Choose an ATS-friendly style, make edits in the live preview, and save an editable Word document or PDF.</p>
         <div class="seo-benefits"><span>Free to use</span><span>No account required</span><span>Saved in your browser</span></div>
         <a class="seo-cta" href="#builder">Start building your resume <span aria-hidden="true">↓</span></a>
       </div>
     </section>
-    <ResumeBuilder client:load />
     {adsEnabled && slotArticle && <div class="site-ad"><AdSlot slot={slotArticle} client={adsClient} enabled={adsEnabled} /></div>}
     <section class="search-guide" aria-labelledby="guide-title">
       <div class="search-guide-inner">
