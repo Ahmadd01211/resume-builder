@@ -9,7 +9,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL('/clearcv-social.svg', Astro.site);
 const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
 const adsClient = import.meta.env.PUBLIC_ADSENSE_CLIENT?.trim() ?? '';
-const adsEnabled = import.meta.env.PUBLIC_ADS_ENABLED === 'true' && import.meta.env.PUBLIC_ADS_CONSENT_READY === 'true' && /^ca-pub-\d{16}$/.test(adsClient);
+const adsClientValid = /^ca-pub-\d{16}$/.test(adsClient);
+const adsEnabled = import.meta.env.PUBLIC_ADS_ENABLED === 'true' && import.meta.env.PUBLIC_ADS_CONSENT_READY === 'true' && adsClientValid;
 const slotArticle = import.meta.env.PUBLIC_ADSENSE_SLOT_ARTICLE?.trim() ?? '';
 const slotBottom = import.meta.env.PUBLIC_ADSENSE_SLOT_BOTTOM?.trim() ?? '';
 const faqs = [
@@ -32,6 +33,7 @@ const structuredData = [
     <meta name="theme-color" content="#f5f7f4" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     {googleVerification && <meta name="google-site-verification" content={googleVerification} />}
+    {adsClientValid && <meta name="google-adsense-account" content={adsClient} />}
     <link rel="canonical" href={canonical.toString()} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:type" content="website" />
